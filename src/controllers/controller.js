@@ -32,6 +32,51 @@ class Controller {
 
     connection.end();
   }
+
+  async x(req, res) {
+    connection.connect();
+
+    const query =
+      'SELECT artilheiros AS artilheiro, COUNT(artilheiros) AS vezes FROM campeoes_brasileiro GROUP BY artilheiros';
+
+    connection.query(query, function (err, rows, fields) {
+      if (err) {
+        console.log(err);
+      }
+      var data = [];
+      var array = [];
+      rows.forEach((element) => {
+        var str = element.artilheiro;
+
+        array.push(...(str.match(/\(.+?\)/g) || []));
+      });
+
+      var counts = {};
+      for (var i = 0; i < array.length; i++) {
+        counts[array[i]] = 1 + (counts[array[i]] || 0);
+      }
+
+      var sortable = [];
+      for (var x in counts) {
+        sortable.push([x, counts[x]]);
+      }
+
+      sortable.sort(function (a, b) {
+        return b[1] - a[1];
+      });
+
+      sortable.forEach((element) => {
+        data.push({
+          time: element[0].slice(1, -1),
+          artilheiros: element[1],
+        });
+      });
+
+      res.json(data);
+    });
+
+    connection.end();
+  }
 }
 
 module.exports = new Controller();

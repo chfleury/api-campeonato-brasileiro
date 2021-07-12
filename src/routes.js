@@ -4,4 +4,6 @@ const routes = new Router();
 
 routes.get('/', Controller.fetchTimes);
 routes.get('/time_com_mais_de_dois_titulos', Controller.timesComMaisDe2Titulos);
+routes.get('/x', Controller.x);
+
 module.exports = routes;
