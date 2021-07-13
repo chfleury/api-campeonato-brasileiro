@@ -152,6 +152,49 @@ class Controller {
       }
     );
   }
+
+  async b(req, res) {
+    const gols = req.query.gols;
+
+    if (!gols) {
+      return res
+        .status(400)
+        .json({ message: 'Erro, informe a quantidade de gols' });
+    }
+
+    connection.query(
+      'SELECT artilheiros, gols FROM campeoes_brasileiro',
+      function (err, rows, fields) {
+        if (err) {
+          console.log(err);
+        }
+        // var str = 'Ademar Pantera (Flamengo) César Maluco (Palmeiras)'.replace(
+        //   / *\([^)]*\) */g,
+        //   ','
+        // );
+        var data = [];
+        var counts = {};
+
+        rows.forEach((element) => {
+          var str = element.artilheiros.replace(/ *\([^)]*\) */g, ',');
+          var temp = str.split(',');
+          temp.pop();
+
+          temp.forEach((e) => {
+            counts[e] = element.gols + (counts[e] || 0);
+          });
+        });
+
+        for (var x in counts) {
+          if (counts[x] == gols) {
+            data.push({ artilheiro: x, numero_de_gols: counts[x] });
+          }
+        }
+
+        res.json(data);
+      }
+    );
+  }
 }
 
 module.exports = new Controller();

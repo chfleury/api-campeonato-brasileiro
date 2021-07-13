@@ -8,4 +8,5 @@ routes.get('/x', Controller.x);
 routes.get('/y', Controller.y);
 routes.get('/z', Controller.z);
 routes.get('/a', Controller.a);
+routes.get('/b', Controller.b);
 module.exports = routes;
