@@ -1,6 +1,6 @@
 const express = require('express');
 const routes = require('./routes');
-// const database = require('./config/database');
+const database = require('./config/database');
 
 class App {
   constructor() {
@@ -9,7 +9,7 @@ class App {
     this.middlewares();
     this.routes();
 
-    // database.connect();
+    database.connect();
   }
 
   middlewares() {

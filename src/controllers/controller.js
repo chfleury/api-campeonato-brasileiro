@@ -2,8 +2,6 @@ const connection = require('../config/database');
 
 class Controller {
   async fetchTimes(req, res) {
-    connection.connect();
-
     connection.query(
       'SELECT * FROM campeoes_brasileiro',
       function (err, rows, fields) {
@@ -13,13 +11,9 @@ class Controller {
         res.json(rows);
       }
     );
-
-    connection.end();
   }
 
   async timesComMaisDe2Titulos(req, res) {
-    connection.connect();
-
     const query =
       'SELECT vencedor, count(vencedor) AS vitórias FROM campeoes_brasileiro GROUP BY vencedor HAVING COUNT(vencedor) > 2 ORDER BY COUNT(vencedor) DESC';
 
@@ -29,13 +23,9 @@ class Controller {
       }
       res.json(rows);
     });
-
-    connection.end();
   }
 
   async x(req, res) {
-    connection.connect();
-
     const query =
       'SELECT artilheiros AS artilheiro, COUNT(artilheiros) AS vezes FROM campeoes_brasileiro GROUP BY artilheiros';
 
@@ -74,8 +64,6 @@ class Controller {
 
       res.json(data);
     });
-
-    connection.end();
   }
 }
 
