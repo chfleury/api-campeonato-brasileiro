@@ -65,6 +65,56 @@ class Controller {
       res.json(data);
     });
   }
+
+  async y(req, res) {
+    connection.query(
+      'SELECT artilheiros, gols FROM campeoes_brasileiro',
+      function (err, rows, fields) {
+        if (err) {
+          console.log(err);
+        }
+        // var str = 'Ademar Pantera (Flamengo) César Maluco (Palmeiras)'.replace(
+        //   / *\([^)]*\) */g,
+        //   ','
+        // );
+        var data = [];
+        var counts = {};
+
+        rows.forEach((element) => {
+          var str = element.artilheiros.replace(/ *\([^)]*\) */g, ',');
+          var temp = str.split(',');
+          temp.pop();
+
+          temp.forEach((e) => {
+            counts[e] = element.gols + (counts[e] || 0);
+
+            // array.push({e:});
+            // array[e]['gols'] += element['gols'] || {};
+            // array.push(...({ artilheiro: e, gols: element.gols } || []));
+          });
+        });
+
+        // var j = str.split(',');
+        // j.pop();
+        var sortable = [];
+        for (var x in counts) {
+          sortable.push([x, counts[x]]);
+        }
+
+        sortable.sort(function (a, b) {
+          return b[1] - a[1];
+        });
+
+        for (var i = 0; i < 5; i++) {
+          data.push({
+            artilheiro: sortable[i][0],
+            gols: sortable[i][1],
+          });
+        }
+        res.json(data);
+      }
+    );
+  }
 }
 
 module.exports = new Controller();
