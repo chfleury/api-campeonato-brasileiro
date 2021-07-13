@@ -127,6 +127,31 @@ class Controller {
       }
     );
   }
+
+  async a(req, res) {
+    // SELECT time, COUNT(time) AS vezes
+    // (
+    // (SELECT vice AS time FROM campeoes_brasileiro )
+    // UNION ALL
+    // (SELECT terceiro_colocado  FROM campeoes_brasileiro )
+    // UNION ALL
+    // (SELECT quarto_colocado FROM campeoes_brasileiro)
+    // )
+    // AS t WHERE time NOT IN
+    // (
+    // SELECT vencedor AS time FROM campeoes_brasileiro
+    // )
+    // GROUP BY time ORDER BY COUNT(time) DESC
+    connection.query(
+      'SELECT time, COUNT(time) AS vezes FROM ( (SELECT vice AS time FROM campeoes_brasileiro ) UNION ALL (SELECT terceiro_colocado  FROM campeoes_brasileiro ) UNION ALL (SELECT quarto_colocado FROM campeoes_brasileiro) ) AS t WHERE time NOT IN ( SELECT vencedor AS time FROM campeoes_brasileiro ) GROUP BY time ORDER BY COUNT(time) DESC',
+      function (err, rows, fields) {
+        if (err) {
+          console.log(err);
+        }
+        res.json(rows);
+      }
+    );
+  }
 }
 
 module.exports = new Controller();
