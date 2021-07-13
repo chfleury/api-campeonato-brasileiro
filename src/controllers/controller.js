@@ -115,6 +115,18 @@ class Controller {
       }
     );
   }
+
+  async z(req, res) {
+    connection.query(
+      'SELECT vice, COUNT(vice) AS vezes FROM campeoes_brasileiro GROUP BY vice ORDER BY COUNT(vice) DESC LIMIT 1;',
+      function (err, rows, fields) {
+        if (err) {
+          console.log(err);
+        }
+        res.json(rows[0]);
+      }
+    );
+  }
 }
 
 module.exports = new Controller();
