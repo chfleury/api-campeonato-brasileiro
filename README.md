@@ -40,6 +40,6 @@ Nesse projeto foram utilizadas apenas as dependencias do Express e MySQL
 ## Como executar a aplicação
 1. Clone esse repositório para sua máquina
 1. Após efetuar o clone, execute **npm install** na pasta raiz do projeto para instalar todas as dependencias
-1. Para iniciar a aplicação, execute o comando **node ./src/index.js** na pasta raiz do projeto
+1. Para iniciar a aplicação, execute o comando **node ./src/index.js** na pasta raiz do projeto<br />
 A aplicação está usando a porta 3333, pode ser mudadada no arquivo src/index.js
 
