@@ -31,7 +31,7 @@ A lista de artilheiros que possuem determinada quantidade de gols:<br />
 * **./src/index.js** Arquivo index da aplicação
 
 ## Arquivo SQL
-O arquivo * **teste_medipreco.sql** se encontra na pasta raiz da aplicação.<br />
+O arquivo  **teste_medipreco.sql** se encontra na pasta raiz da aplicação.<br />
 Por conveniencia, apenas usei um conversor de svg para sql para obter a base de dados.
 
 ## Dependencias
