@@ -1,4 +1,4 @@
-# Teste Medipreço
+# Api Campeonato brasileiro (desafio de pegar esse SQL convertido de um EXCEL mal estruturado e fazer uma api rest funional)
 
 
 
